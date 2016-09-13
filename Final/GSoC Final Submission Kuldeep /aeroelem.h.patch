@@ -1,0 +1,31 @@
+--- aeroelem.h	2015-08-26 14:09:27.000000000 +0530
++++ aeroelem_new.h	2016-08-22 11:08:18.642199000 +0530
+@@ -202,6 +202,7 @@
+ 
+ 	/* inherited from SimulationEntity */
+ 	virtual unsigned int iGetNumDof(void) const;
++	//~ virtual unsigned int dGetForces(void) const;
+ 	virtual std::ostream& DescribeDof(std::ostream& out,
+ 		const char *prefix = "", bool bInitial = false) const;
+ 	virtual void DescribeDof(std::vector<std::string>& desc,
+@@ -309,6 +310,8 @@
+ 	 * l'OutputHandler, dove scrivere il proprio output
+ 	 */
+ 	virtual void Output(OutputHandler& OH) const;
++	
++	
+ 
+ 	/* assemblaggio residuo */
+ 	virtual SubVectorHandler&
+@@ -319,6 +322,11 @@
+ 	virtual AerodynamicElem::Type GetAerodynamicElemType(void) const {
+ 		return AerodynamicElem::AERODYNAMICBODY;
+ 	};
++	
++	// get forces from the aerodynamic body
++	// ~ virtual Vec3 dGetForces(const Vec3& /* X */ ) const;
++	virtual Vec3 dGetForces(void) const;
++	virtual Vec3 dGetPosition(void) const;
+ 
+ 	/* *******PER IL SOLUTORE PARALLELO******** */
+ 	/*

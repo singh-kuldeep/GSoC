@@ -1,0 +1,42 @@
+--- aeroelem.cc	2016-04-18 13:39:51.000000000 +0530
++++ aeroelem_new.cc	2016-09-02 00:07:38.685895000 +0530
+@@ -44,6 +44,7 @@
+ #include "Rot.hh"
+ 
+ #include <sstream>
++#include <typeinfo>
+ 
+ /* AerodynamicOutput - begin */
+ 
+@@ -1068,9 +1069,8 @@
+ 		 * aggiunge alla velocita' la velocita' indotta
+ 		 */
+ 		if (pIndVel != 0) {
+-	 		Vr += pIndVel->GetInducedVelocity(GetElemType(),
+-				GetLabel(), iPnt, Xnr);
+-		}
++	 		Vr += pIndVel->GetInducedVelocity(GetElemType(), GetLabel(), iPnt, Xnr);
++	 		}
+ 
+ 		/* Copia i dati nel vettore di lavoro dVAM */
+ 		doublereal dTw = Twist.dGet(dCsi) + dGet();
+@@ -1210,6 +1210,19 @@
+ 	}	}
+ }
+ 
++//~ AerodynamicBody::dGetForces(const Vec3& X) const
++Vec3
++AerodynamicBody::dGetForces(void) const
++{
++	return F;
++}
++Vec3
++AerodynamicBody::dGetPosition(void) const
++{
++	return pNode->GetXCurr();
++}
++
++
+ /* AerodynamicBody - end */
+ 
+ static bool
